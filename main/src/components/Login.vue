@@ -22,6 +22,7 @@
 </template>
 <script>
 export default {
+  props: ['update'],
   data() {
     return {
       username: '',
@@ -41,7 +42,8 @@ export default {
     handleLogin() {
       this.login = true
       this.visible = false
-    }
+      this.$emit('update', this.username)
+    },
   },
 };
 </script>

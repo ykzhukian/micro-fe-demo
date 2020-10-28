@@ -25,12 +25,17 @@
             :type="collapsed ? 'menu-unfold' : 'menu-fold'"
             @click="() => (collapsed = !collapsed)"
           />
-          <login />
+          <login @update="updateUsername" />
         </a-layout-header>
         <a-layout-content
           :style="{ margin: '24px 16px', padding: '24px', background: '#fff', minHeight: '280px' }"
         >
-          {{selected}}
+          <iframe
+            :src="contentSrc"
+            frameborder="0"
+            name="content"
+            @load="postMsg"
+          ></iframe>
         </a-layout-content>
       </a-layout>
     </a-layout>
@@ -43,16 +48,44 @@ export default {
   data() {
     return {
       collapsed: false,
-      selected: 'laravel'
+      selected: 'laravel',
+      username: ''
     };
   },
   components: {
     Login,
   },
+  computed: {
+    contentSrc() {
+      switch(this.selected) {
+        case 'laravel':
+          return 'http://localhost:9000/laravel'
+        case 'vue3':
+          return 'http://localhost:9000/vue3'
+        case 'react':
+          return 'http://localhost:9000/react'
+        default:
+          return ''
+      }
+    }
+  },
   methods: {
     handleChange({ key }) {
       this.selected = key
-    }
+    },
+    updateUsername(val) {
+      this.username = val
+      this.postMsg()
+    },
+    postMsg() {
+      const content = window.frames['content'];
+      const msg = {
+        source: 'main',
+        username: this.username,
+      }
+
+      content.postMessage(msg, this.contentSrc);
+    },
   },
 };
 </script>
@@ -77,5 +110,9 @@ export default {
   height: 32px;
   background: rgba(255, 255, 255, 0.2);
   margin: 16px;
+}
+iframe {
+  width: 100%;
+  height: 100%;
 }
 </style>

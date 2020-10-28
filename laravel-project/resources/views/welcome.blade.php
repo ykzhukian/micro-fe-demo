@@ -40,8 +40,22 @@
                 <div class="flex justify-center pt-8 sm:justify-start sm:pt-0" style="color:#fff;font-size:23px;">
                     一个 Laravel 项目
                 </div>
+                <h3 id="username" style="color:#fff;font-size:23px;"></h3>
                 </div>
             </div>
         </div>
     </body>
+    <script>
+        const receiveMsgHandler = ({ data }) => {
+        if (data.source !== 'main') {
+            return;
+        }
+            console.log('Laravel received: ', data)
+            const { username } = data
+            document.querySelector('#username').innerHTML = `欢迎，${username}`
+            // setUsername(data.username)
+        }
+        console.log('Laravel: Listening message from main...');
+        window.addEventListener('message', receiveMsgHandler);
+    </script>
 </html>
