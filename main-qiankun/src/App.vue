@@ -30,12 +30,7 @@
         <a-layout-content
           :style="{ margin: '24px 16px', padding: '24px', background: '#fff', minHeight: '280px' }"
         >
-          <iframe
-            :src="contentSrc"
-            frameborder="0"
-            name="content"
-            @load="postMsg"
-          ></iframe>
+          <!-- router-view -->
         </a-layout-content>
       </a-layout>
     </a-layout>
@@ -84,7 +79,7 @@ export default {
         username: this.username,
       }
 
-      content.postMessage(msg, 'http://localhost:9000');
+      content.postMessage(msg, this.contentSrc);
     },
   },
 };
