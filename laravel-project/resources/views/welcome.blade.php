@@ -40,7 +40,7 @@
                 <div class="flex justify-center pt-8 sm:justify-start sm:pt-0" style="color:#fff;font-size:23px;">
                     一个 Laravel 项目
                 </div>
-                <h3 id="username" style="color:#fff;font-size:23px;"></h3>
+                <h3 id="username" style="color:#fff;font-size:23px;" class="title"></h3>
                 </div>
             </div>
         </div>
@@ -57,5 +57,8 @@
         }
         console.log('Laravel: Listening message from main...');
         window.addEventListener('message', receiveMsgHandler);
+
+        const item = window.localStorage.getItem('item')
+        console.log('laravel get item', item);
     </script>
 </html>

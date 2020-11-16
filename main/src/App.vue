@@ -112,7 +112,7 @@ export default {
   margin: 16px;
 }
 iframe {
-  width: 100%;
+  width: 50%;
   height: 100%;
 }
 </style>

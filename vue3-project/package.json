@@ -9,6 +9,8 @@
   },
   "dependencies": {
     "core-js": "^3.6.5",
+    "element-ui": "^2.14.1",
+    "single-spa-vue": "^2.1.0",
     "vue": "^3.0.0"
   },
   "devDependencies": {
